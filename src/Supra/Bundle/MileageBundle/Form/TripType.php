@@ -17,7 +17,8 @@ class TripType extends AbstractType
         $builder
             ->add('travelTime')
             ->add('mileage')
-            ->add('Location', 'entity', array(
+            ->add('tripDate', 'datetime', array('data' => new \DateTime('now')))
+            ->add('locations', 'entity', array(
                 'class'=>'SupraMileageBundle:Location',
                 'property'=>'title',
                 'multiple'=>'true'

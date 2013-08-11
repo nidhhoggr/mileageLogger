@@ -25,15 +25,32 @@ class Trip
     private $mileage;
 
     /**
-     * @var \Supra\Bundle\MileageBundle\Entity\Location
+     * @var \DateTime
      */
-    private $location;
+    private $createdAt;
+
+    /**
+     * @var \DateTime
+     */
+    private $tripDate;
 
     /**
      * @var \Supra\Bundle\MileageBundle\Entity\Client
      */
     private $client;
 
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     */
+    private $locations;
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->locations = new \Doctrine\Common\Collections\ArrayCollection();
+    }
 
     /**
      * Get id
@@ -94,27 +111,51 @@ class Trip
     }
 
     /**
-     * Set location
+     * Set createdAt
      *
-     * @param \Supra\Bundle\MileageBundle\Entity\Location $location
+     * @param \DateTime $createdAt
      *
      * @return Trip
      */
-    public function setLocation(\Supra\Bundle\MileageBundle\Entity\Location $location = null)
+    public function setCreatedAt($createdAt)
     {
-        $this->location = $location;
+        $this->createdAt = $createdAt;
 
         return $this;
     }
 
     /**
-     * Get location
+     * Get createdAt
      *
-     * @return \Supra\Bundle\MileageBundle\Entity\Location 
+     * @return \DateTime 
      */
-    public function getLocation()
+    public function getCreatedAt()
     {
-        return $this->location;
+        return $this->createdAt;
+    }
+
+    /**
+     * Set tripDate
+     *
+     * @param \DateTime $tripDate
+     *
+     * @return Trip
+     */
+    public function setTripDate($tripDate)
+    {
+        $this->tripDate = $tripDate;
+
+        return $this;
+    }
+
+    /**
+     * Get tripDate
+     *
+     * @return \DateTime 
+     */
+    public function getTripDate()
+    {
+        return $this->tripDate;
     }
 
     /**
@@ -139,76 +180,6 @@ class Trip
     public function getClient()
     {
         return $this->client;
-    }
-    /**
-     * @var integer
-     */
-    private $startLocationId;
-
-    /**
-     * @var integer
-     */
-    private $endLocationId;
-
-
-    /**
-     * Set startLocationId
-     *
-     * @param integer $startLocationId
-     *
-     * @return Trip
-     */
-    public function setStartLocationId($startLocationId)
-    {
-        $this->startLocationId = $startLocationId;
-
-        return $this;
-    }
-
-    /**
-     * Get startLocationId
-     *
-     * @return integer 
-     */
-    public function getStartLocationId()
-    {
-        return $this->startLocationId;
-    }
-
-    /**
-     * Set endLocationId
-     *
-     * @param integer $endLocationId
-     *
-     * @return Trip
-     */
-    public function setEndLocationId($endLocationId)
-    {
-        $this->endLocationId = $endLocationId;
-
-        return $this;
-    }
-
-    /**
-     * Get endLocationId
-     *
-     * @return integer 
-     */
-    public function getEndLocationId()
-    {
-        return $this->endLocationId;
-    }
-    /**
-     * @var \Doctrine\Common\Collections\Collection
-     */
-    private $locations;
-
-    /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->locations = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
     /**
@@ -243,5 +214,13 @@ class Trip
     public function getLocations()
     {
         return $this->locations;
+    }
+
+    public function prePersist()
+    {
+        $this->createdAt = new \DateTime();
+
+        if($this->tripDate === null)
+            $this->tripDate = new \DateTime();
     }
 }

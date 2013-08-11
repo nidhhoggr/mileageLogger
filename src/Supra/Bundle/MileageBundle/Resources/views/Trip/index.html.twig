@@ -1,23 +1,26 @@
-{% extends '::base.html.twig' %}
+{% extends 'SupraMileageBundle::layout.html.twig' %}
 
-{% block body -%}
+{% block content -%}
+
     <h1>Trip list</h1>
 
     <table class="records_list">
         <thead>
             <tr>
-                <th>Id</th>
-                <th>Traveltime</th>
-                <th>Mileage</th>
+                <th>Trip Date/Time</th>
+                <th>Locations</th>
                 <th>Actions</th>
             </tr>
         </thead>
         <tbody>
         {% for entity in entities %}
             <tr>
-                <td><a href="{{ path('trip_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
-                <td>{{ entity.travelTime }}</td>
-                <td>{{ entity.mileage }}</td>
+                <td>{{ entity.tripDate|date('F d, Y h:i a') }}</td>
+                <td>
+                    {% for location in entity.locations %}
+                        {{ location.title }}{% if not loop.last %},{% endif %} 
+                    {% endfor %}
+                </td>
                 <td>
                 <ul>
                     <li>
@@ -36,7 +39,7 @@
         <ul>
         <li>
             <a href="{{ path('trip_new') }}">
-                Create a new entry
+                Log another trip
             </a>
         </li>
     </ul>

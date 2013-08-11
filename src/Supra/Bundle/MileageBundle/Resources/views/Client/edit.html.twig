@@ -1,14 +1,14 @@
-{% extends '::base.html.twig' %}
+{% extends 'SupraMileageBundle::layout.html.twig' %}
 
-{% block body -%}
-    <h1>Client edit</h1>
+{% block content -%}
+    <h1>Edit Client</h1>
 
     {{ form(edit_form) }}
 
         <ul class="record_actions">
     <li>
         <a href="{{ path('client') }}">
-            Back to the list
+            Show all clients
         </a>
     </li>
     <li>{{ form(delete_form) }}</li>

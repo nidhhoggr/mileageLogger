@@ -1,14 +1,15 @@
-{% extends '::base.html.twig' %}
+{% extends 'SupraMileageBundle::layout.html.twig' %}
 
-{% block body -%}
-    <h1>Trip creation</h1>
+{% block content -%}
+
+    <h1>Logging Trip</h1>
 
     {{ form(form) }}
 
         <ul class="record_actions">
     <li>
         <a href="{{ path('trip') }}">
-            Back to the list
+            Show all trips
         </a>
     </li>
 </ul>

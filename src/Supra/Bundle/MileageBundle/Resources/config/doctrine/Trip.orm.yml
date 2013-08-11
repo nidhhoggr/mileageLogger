@@ -12,9 +12,18 @@ Supra\Bundle\MileageBundle\Entity\Trip:
             type: string
             length: 255
             column: travel_time
+            nullable: true
         mileage:
             type: integer
-    lifecycleCallbacks: {  }
+            nullable: true
+        createdAt:
+            type: datetime
+            nullable: true
+        tripDate:
+            type: datetime
+            nullable: true
+    lifecycleCallbacks:
+        prePersist: [ prePersist ]
     manyToMany:
         locations:
             targetEntity: Location

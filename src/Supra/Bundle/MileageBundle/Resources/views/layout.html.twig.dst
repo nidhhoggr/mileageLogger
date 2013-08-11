@@ -1,0 +1,21 @@
+{% extends '::base.html.twig' %}
+
+{% block body %}
+    <h1>Mileage Logger</h1>
+
+    <ul id="nav_menu">
+        <li>
+            <a href="{{ path('location') }}">Locations</a>
+        </li>
+        <li>
+            <a href="{{ path('client') }}">Clients</a>
+        </li>
+        <li>
+            <a href="{{ path('trip') }}">Trips</a>
+        </li>
+    </ul>
+
+    <div id="content_block">
+        {% block content %}{% endblock %}
+    </div>
+{% endblock %}

@@ -1,21 +1,50 @@
-{% extends '::base.html.twig' %}
+{% extends 'SupraMileageBundle::layout.html.twig' %}
 
-{% block body -%}
-    <h1>Trip</h1>
+{% block content -%}
+
+    <h1>Trip Details</h1>
 
     <table class="record_properties">
         <tbody>
+            {% if entity.travelTime is not null %} 
             <tr>
-                <th>Id</th>
-                <td>{{ entity.id }}</td>
-            </tr>
-            <tr>
-                <th>Traveltime</th>
+                <th>Travel Time</th>
                 <td>{{ entity.travelTime }}</td>
             </tr>
+            {% endif %}
+            {% if entity.mileage is not null %} 
             <tr>
                 <th>Mileage</th>
                 <td>{{ entity.mileage }}</td>
+            </tr>
+            {% endif %}
+            {% if entity.tripDate is not null %}
+            <tr>
+                <th>Trip Date/Time</th>
+                <td>{{ entity.tripDate|date('F d, Y h:i a') }}</td>
+            </tr>
+            {% endif %}
+            {% if entity.createdAt is not null %}
+            <tr>
+                <th>Entry Created</th>
+                <td>{{ entity.createdAt|date('F d, Y h:i a') }}</td>
+            </tr>
+            {% endif %}
+
+            <tr>
+                <th>Travel Locations</th>
+                <td>
+
+                    {% for location in entity.locations %}
+
+                    <li>
+                        {{ location.title }}
+                    </li>
+
+                    {% endfor %}
+
+                </td>
+
             </tr>
         </tbody>
     </table>
@@ -23,7 +52,7 @@
         <ul class="record_actions">
     <li>
         <a href="{{ path('trip') }}">
-            Back to the list
+            Show all trips
         </a>
     </li>
     <li>

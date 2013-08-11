@@ -1,0 +1,11 @@
+supra_mileage:
+    resource: "@SupraMileageBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
+
+#tutorial_todo:
+#    resource: "@TutorialTodoBundle/Controller/"
+#    type:     annotation
+#    prefix:   /
+

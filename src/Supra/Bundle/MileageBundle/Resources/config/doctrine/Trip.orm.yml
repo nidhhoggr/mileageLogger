@@ -1,0 +1,33 @@
+Supra\Bundle\MileageBundle\Entity\Trip:
+    type: entity
+    table: null
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        travelTime:
+            type: string
+            length: 255
+            column: travel_time
+        mileage:
+            type: integer
+    lifecycleCallbacks: {  }
+    manyToMany:
+        locations:
+            targetEntity: Location
+            inversedBy: trips
+            joinTable:
+                name: location_trips
+                joinColumns: 
+                    trip_id:
+                        referencedColumnName: id
+                inverseJoinColumns:
+                    location_id:
+                        referencedColumnName: id
+    manyToOne:
+        client:
+            targetEntity: Client
+            inversedBy: trips

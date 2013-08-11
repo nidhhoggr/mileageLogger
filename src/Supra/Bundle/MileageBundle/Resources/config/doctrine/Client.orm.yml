@@ -1,0 +1,21 @@
+Supra\Bundle\MileageBundle\Entity\Client:
+    type: entity
+    table: null
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        name:
+            type: string
+            length: 255
+    lifecycleCallbacks: {  }
+    oneToMany:
+        trips:
+            targetEntity: Trip
+            mappedBy: client
+        locations:
+            targetEntity: Location
+            mappedBy: client

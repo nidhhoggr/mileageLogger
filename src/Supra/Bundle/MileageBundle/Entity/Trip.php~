@@ -1,0 +1,201 @@
+<?php
+
+namespace Supra\Bundle\MileageBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Trip
+ */
+class Trip
+{
+    /**
+     * @var integer
+     */
+    private $id;
+
+    /**
+     * @var string
+     */
+    private $travelTime;
+
+    /**
+     * @var integer
+     */
+    private $mileage;
+
+    /**
+     * @var \Supra\Bundle\MileageBundle\Entity\Location
+     */
+    private $location;
+
+    /**
+     * @var \Supra\Bundle\MileageBundle\Entity\Client
+     */
+    private $client;
+
+
+    /**
+     * Get id
+     *
+     * @return integer 
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set travelTime
+     *
+     * @param string $travelTime
+     *
+     * @return Trip
+     */
+    public function setTravelTime($travelTime)
+    {
+        $this->travelTime = $travelTime;
+
+        return $this;
+    }
+
+    /**
+     * Get travelTime
+     *
+     * @return string 
+     */
+    public function getTravelTime()
+    {
+        return $this->travelTime;
+    }
+
+    /**
+     * Set mileage
+     *
+     * @param integer $mileage
+     *
+     * @return Trip
+     */
+    public function setMileage($mileage)
+    {
+        $this->mileage = $mileage;
+
+        return $this;
+    }
+
+    /**
+     * Get mileage
+     *
+     * @return integer 
+     */
+    public function getMileage()
+    {
+        return $this->mileage;
+    }
+
+    /**
+     * Set location
+     *
+     * @param \Supra\Bundle\MileageBundle\Entity\Location $location
+     *
+     * @return Trip
+     */
+    public function setLocation(\Supra\Bundle\MileageBundle\Entity\Location $location = null)
+    {
+        $this->location = $location;
+
+        return $this;
+    }
+
+    /**
+     * Get location
+     *
+     * @return \Supra\Bundle\MileageBundle\Entity\Location 
+     */
+    public function getLocation()
+    {
+        return $this->location;
+    }
+
+    /**
+     * Set client
+     *
+     * @param \Supra\Bundle\MileageBundle\Entity\Client $client
+     *
+     * @return Trip
+     */
+    public function setClient(\Supra\Bundle\MileageBundle\Entity\Client $client = null)
+    {
+        $this->client = $client;
+
+        return $this;
+    }
+
+    /**
+     * Get client
+     *
+     * @return \Supra\Bundle\MileageBundle\Entity\Client 
+     */
+    public function getClient()
+    {
+        return $this->client;
+    }
+    /**
+     * @var integer
+     */
+    private $startLocationId;
+
+    /**
+     * @var integer
+     */
+    private $endLocationId;
+
+
+    /**
+     * Set startLocationId
+     *
+     * @param integer $startLocationId
+     *
+     * @return Trip
+     */
+    public function setStartLocationId($startLocationId)
+    {
+        $this->startLocationId = $startLocationId;
+
+        return $this;
+    }
+
+    /**
+     * Get startLocationId
+     *
+     * @return integer 
+     */
+    public function getStartLocationId()
+    {
+        return $this->startLocationId;
+    }
+
+    /**
+     * Set endLocationId
+     *
+     * @param integer $endLocationId
+     *
+     * @return Trip
+     */
+    public function setEndLocationId($endLocationId)
+    {
+        $this->endLocationId = $endLocationId;
+
+        return $this;
+    }
+
+    /**
+     * Get endLocationId
+     *
+     * @return integer 
+     */
+    public function getEndLocationId()
+    {
+        return $this->endLocationId;
+    }
+}

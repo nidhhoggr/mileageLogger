@@ -50,6 +50,9 @@ class TripController extends Controller
 
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
+
+            $entity = $this->_calculateDistanceAndTime($entity);
+
             $em->persist($entity);
             $em->flush();
 
@@ -192,6 +195,7 @@ class TripController extends Controller
         $editForm->handleRequest($request);
 
         if ($editForm->isValid()) {
+            $entity = $this->_calculateDistanceAndTime($entity);
             $em->persist($entity);
             $em->flush();
 
@@ -245,5 +249,44 @@ class TripController extends Controller
             ->add('submit', 'submit', array('label' => 'Delete'))
             ->getForm()
         ;
+    }
+
+
+    /**
+     *    BEGIN MAPS API FUNCTIONS HERE
+     */
+ 
+
+    private function _calculateDistanceAndTime(Trip $entity)
+    {
+
+        if(is_null($entity->getMileage()) || is_null($entity->getTravelTime())) { 
+
+            $response = json_decode(file_get_contents($this->_obtainMapAPIURI($entity)));
+
+            if($response->status == "OK") {
+
+                $legs = $response->routes[0]->legs[0];
+
+                if(is_null($entity->getMileage())) $entity->setMileage($legs->distance->text);
+
+                if(is_null($entity->getTravelTime())) $entity->setTravelTime(((int)$legs->duration->value / 60));
+            }
+        }
+
+        return $entity;
+    }
+
+    private function _obtainMapAPIURI(Trip $entity) 
+    {
+        $maps_api_url = "http://maps.googleapis.com/maps/api/directions/json?origin=";
+
+        $locations = $entity->getLocations();
+
+        $maps_api_url .= urlencode((string)$locations[0]) . '&destination=' . urlencode((string)$locations[1]);
+
+        $maps_api_url .= '&sensor=false';
+
+        return $maps_api_url;
     }
 }

@@ -1,0 +1,11 @@
+Supra\Bundle\MileageBundle\Entity\Trip:
+    properties:
+        locations:
+            - Count:
+                min: 2
+                max: 2
+                minMessage: "You must have at least 2 trip locations"
+                maxMessage: "You must have no more than 2 trip locations"
+                exactMessage: "You must provide exactly 2 trip locations"
+
+                

@@ -8,7 +8,7 @@
         <tbody>
             {% if entity.travelTime is not null %} 
             <tr>
-                <th>Travel Time</th>
+                <th>Travel Duration (mins)</th>
                 <td>{{ entity.travelTime }}</td>
             </tr>
             {% endif %}
@@ -46,6 +46,14 @@
                 </td>
 
             </tr>
+
+            {% if entity.purpose is not null %}
+            <tr>
+                <th>Purpose</th>
+                <td>{{ entity.purpose }}</td>
+            </tr>
+            {% endif %}
+
         </tbody>
     </table>
 

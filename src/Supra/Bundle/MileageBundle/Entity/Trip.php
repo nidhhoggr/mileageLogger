@@ -218,9 +218,39 @@ class Trip
 
     public function prePersist()
     {
+
         $this->createdAt = new \DateTime();
 
         if($this->tripDate === null)
             $this->tripDate = new \DateTime();
+    }
+    /**
+     * @var string
+     */
+    private $purpose;
+
+
+    /**
+     * Set purpose
+     *
+     * @param string $purpose
+     *
+     * @return Trip
+     */
+    public function setPurpose($purpose)
+    {
+        $this->purpose = $purpose;
+
+        return $this;
+    }
+
+    /**
+     * Get purpose
+     *
+     * @return string 
+     */
+    public function getPurpose()
+    {
+        return $this->purpose;
     }
 }

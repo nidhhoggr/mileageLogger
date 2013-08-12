@@ -9,9 +9,7 @@ Supra\Bundle\MileageBundle\Entity\Trip:
                 strategy: AUTO
     fields:
         travelTime:
-            type: string
-            length: 255
-            column: travel_time
+            type: integer
             nullable: true
         mileage:
             type: integer
@@ -21,6 +19,9 @@ Supra\Bundle\MileageBundle\Entity\Trip:
             nullable: true
         tripDate:
             type: datetime
+            nullable: true
+        purpose: 
+            type: text
             nullable: true
     lifecycleCallbacks:
         prePersist: [ prePersist ]

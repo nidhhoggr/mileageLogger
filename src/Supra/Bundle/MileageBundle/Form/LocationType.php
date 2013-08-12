@@ -16,7 +16,11 @@ class LocationType extends AbstractType
     {
         $builder
             ->add('title')
-            ->add('address')
+            ->add('street')
+            ->add('suiteAptNo')
+            ->add('city')
+            ->add('state')
+            ->add('zip')
             ->add('client')
         ;
     }

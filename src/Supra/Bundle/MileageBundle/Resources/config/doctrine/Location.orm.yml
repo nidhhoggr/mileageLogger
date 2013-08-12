@@ -11,9 +11,22 @@ Supra\Bundle\MileageBundle\Entity\Location:
         title:
             type: string
             length: 255
-        address:
+        street:
             type: string
             length: 255
+        city:
+            type: string
+            length: 64
+        state:
+            type: string
+            length: 32
+        zip:
+            type: string
+            length: 16
+        suiteAptNo:
+            type: string
+            length: 32
+            nullable: true
     lifecycleCallbacks: {  }
     manyToOne:
         client:

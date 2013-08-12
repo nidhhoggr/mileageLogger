@@ -186,4 +186,156 @@ class Location
     {
         return $this->trip;
     }
+    /**
+     * @var string
+     */
+    private $street;
+
+    /**
+     * @var string
+     */
+    private $city;
+
+    /**
+     * @var string
+     */
+    private $state;
+
+    /**
+     * @var string
+     */
+    private $zip;
+
+    /**
+     * @var string
+     */
+    private $suiteAptNo;
+
+
+    /**
+     * Set street
+     *
+     * @param string $street
+     *
+     * @return Location
+     */
+    public function setStreet($street)
+    {
+        $this->street = $street;
+
+        return $this;
+    }
+
+    /**
+     * Get street
+     *
+     * @return string 
+     */
+    public function getStreet()
+    {
+        return $this->street;
+    }
+
+    /**
+     * Set city
+     *
+     * @param string $city
+     *
+     * @return Location
+     */
+    public function setCity($city)
+    {
+        $this->city = $city;
+
+        return $this;
+    }
+
+    /**
+     * Get city
+     *
+     * @return string 
+     */
+    public function getCity()
+    {
+        return $this->city;
+    }
+
+    /**
+     * Set state
+     *
+     * @param string $state
+     *
+     * @return Location
+     */
+    public function setState($state)
+    {
+        $this->state = $state;
+
+        return $this;
+    }
+
+    /**
+     * Get state
+     *
+     * @return string 
+     */
+    public function getState()
+    {
+        return $this->state;
+    }
+
+    /**
+     * Set zip
+     *
+     * @param string $zip
+     *
+     * @return Location
+     */
+    public function setZip($zip)
+    {
+        $this->zip = $zip;
+
+        return $this;
+    }
+
+    /**
+     * Get zip
+     *
+     * @return string 
+     */
+    public function getZip()
+    {
+        return $this->zip;
+    }
+
+    /**
+     * Set suiteAptNo
+     *
+     * @param string $suiteAptNo
+     *
+     * @return Location
+     */
+    public function setSuiteAptNo($suiteAptNo)
+    {
+        $this->suiteAptNo = $suiteAptNo;
+
+        return $this;
+    }
+
+    /**
+     * Get suiteAptNo
+     *
+     * @return string 
+     */
+    public function getSuiteAptNo()
+    {
+        return $this->suiteAptNo;
+    }
+
+    public function __toString()
+    {
+
+        return $this->getStreet() . ' ' . $this->getSuiteAptNo() . ' ' . $this->getCity() . ', '
+               . $this->getState() . ' ' . $this->getZip();
+    }
 }

@@ -15,7 +15,7 @@ class TripType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('travelTime')
+            ->add('travelTime',null, array('label'=>'Travel Duration (mins)'))
             ->add('mileage')
             ->add('tripDate', 'datetime', array('data' => new \DateTime('now')))
             ->add('locations', 'entity', array(
@@ -24,6 +24,7 @@ class TripType extends AbstractType
                 'multiple'=>'true'
             ))
             ->add('client')
+            ->add('purpose')
         ;
     }
     

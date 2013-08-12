@@ -14,6 +14,21 @@ class DefaultController extends Controller
      */
     public function indexAction()
     {
-        return array('name' => 'name'); 
+
+        $em = $this->getDoctrine()->getManager();
+
+        $trips = $em->getRepository('SupraMileageBundle:Trip')->findAll();
+
+        $totalMileage = $totalDuration = 0;
+
+        foreach($trips as $trip) {
+
+            $totalMileage += $trip->getMileage();
+            $totalDuration += $trip->getTravelTime();
+        }
+
+        return compact('totalMileage','totalDuration');
     }
+
+    
 }

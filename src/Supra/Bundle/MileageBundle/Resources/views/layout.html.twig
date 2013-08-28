@@ -7,15 +7,23 @@
 {% block stylesheets %}
 <link rel="stylesheet" href="{{ asset('bundles/supramileage/css/style.css') }}" type="text/css" media="all" />
 <link rel="stylesheet" href="{{ asset('bundles/supramileage/css/jquery.jcarousel.css') }}" type="text/css" media="all" />
+<link rel="stylesheet" href="{{ asset('bundles/supramileage/css/jquery-ui.css') }}" type="text/css" media="all" />
 <!--[if IE 6]><link rel="stylesheet" href="{{ asset('bundles/supramileage/css/ie6.css') }}" type="text/css" media="all" /><![endif]-->
 {% endblock %}
-<link rel="shortcut icon" href="{{ asset('bundles/supramileage/css/images/favicon.ico') }}" />
+<link rel="shortcut icon" href="{{ asset('bundles/supramileage/images/favicon.ico') }}" />
 {% block javascripts %}
 <script type="text/javascript" src="{{ asset('bundles/supramileage/js/jquery-1.4.2.min.js') }}"></script>
 <script type="text/javascript" src="{{ asset('bundles/supramileage/js/jquery.jcarousel.pack.js') }}"></script>
 <script type="text/javascript" src="{{ asset('bundles/supramileage/js/func.js') }}"></script>
-{% endblock %}
+<script type="text/javascript" src="{{ asset('bundles/supramileage/js/jquery-ui.min.js') }}"></script>
 </head>
+
+<script type="text/javascript">
+    var app_path = "{{asset('bundles/supramileage')}}";
+</script>
+<script type="text/javascript" src="{{ asset('bundles/supramileage/js/sml_bootload.js') }}"></script>
+{% endblock %}
+
 <body>
 {% block body %}
 <div class="shell">

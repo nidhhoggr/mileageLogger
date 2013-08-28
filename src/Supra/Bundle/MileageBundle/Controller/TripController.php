@@ -50,8 +50,11 @@ class TripController extends Controller
 
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
+ 
+            $params = $request->request->get("supra_bundle_mileagebundle_trip");
 
-            $entity = $this->_calculateDistanceAndTime($entity);
+            //extract into a modified entity to selectRoute
+            $entity = $this->_calculateDistanceAndTime($entity,$params);
 
             $em->persist($entity);
             $em->flush();
@@ -253,12 +256,50 @@ class TripController extends Controller
 
 
     /**
-     *    BEGIN MAPS API FUNCTIONS HERE
+     * Select which map route to use
+     *
+     * @Route("/select_route_ajax", name="trip_select_route_ajax")
+     * @Method("POST")
+     * @Template("SupraMileageBundle:Trip:select_route_ajax.html.twig")
      */
- 
-
-    private function _calculateDistanceAndTime(Trip $entity)
+    public function selectRouteAjaxAction(Request $request)
     {
+        $em = $this->getDoctrine()->getManager();
+
+        $parsed_locations[] = $request->request->get('l1');
+
+        $parsed_locations[] = $request->request->get('l2');
+
+        foreach($parsed_locations as $location) {
+
+            if(substr($location,0,3) === "id:") {
+
+                $locations[] = $em->getRepository('SupraMileageBundle:Location')->find(substr($location,3));
+
+            } else if(substr($location,0,8) === "address:") {
+              
+                $locations[] = substr($location,8);
+            }
+        }
+
+        $response = json_decode(file_get_contents($this->_obtainMapAPIURIWithLocationArray($locations)));
+
+        if($response->status == "OK") {
+
+            $routes = $response->routes;
+        }
+
+        return compact('routes');
+    }
+
+    /**
+    *    BEGIN MAPS API FUNCTIONS HERE
+    */
+
+    private function _calculateDistanceAndTime(Trip $entity,$params)
+    {
+
+        $selectRoute = false;
 
         if(is_null($entity->getMileage()) || is_null($entity->getTravelTime())) { 
 
@@ -266,7 +307,9 @@ class TripController extends Controller
 
             if($response->status == "OK") {
 
-                $legs = $response->routes[0]->legs[0];
+                $selected_route = (isset($params['selected_route']))?$params['selected_route']:0;
+
+                $legs = $response->routes[$selected_route]->legs[0];
 
                 if(is_null($entity->getMileage())) $entity->setMileage($legs->distance->text);
 
@@ -279,14 +322,41 @@ class TripController extends Controller
 
     private function _obtainMapAPIURI(Trip $entity) 
     {
-        $maps_api_url = "http://maps.googleapis.com/maps/api/directions/json?origin=";
-
         $locations = $entity->getLocations();
+
+        return $this->_obtainMapAPIURIWithLocationArray($locations);
+    }
+
+    private function _obtainMapAPIURIWithLocationArray($locations) {
+
+        $maps_api_url = "http://maps.googleapis.com/maps/api/directions/json?origin=";
 
         $maps_api_url .= urlencode((string)$locations[0]) . '&destination=' . urlencode((string)$locations[1]);
 
-        $maps_api_url .= '&sensor=false';
+        $maps_api_url .= '&sensor=false&alternatives=true';
 
         return $maps_api_url;
+    }
+
+
+    /**
+     * Select which map route to use
+     *
+     * @Route("/calculate_distance_and_time_ajax", name="trip_calculate_distance_and_time_ajax")
+     * @Method("POST")
+     */
+    public function calculateDistanceAndTimeAjaxAction(Request $request)
+    {
+
+        $routes = $this->selectRouteAjaxAction($request);
+        $route = $routes['routes'][$request->request->get('selected')];
+
+        $legs = $route->legs[0];
+
+        $mileage = (float) $legs->distance->text;
+
+        $duration = ((float)$legs->duration->value / 60);
+
+        echo json_encode(compact('mileage','duration')); die(); 
     }
 }

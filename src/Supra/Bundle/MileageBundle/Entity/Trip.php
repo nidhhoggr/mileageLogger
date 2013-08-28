@@ -253,4 +253,33 @@ class Trip
     {
         return $this->purpose;
     }
+    /**
+     * @var string
+     */
+    private $unlisted_address;
+
+
+    /**
+     * Set unlisted_address
+     *
+     * @param string $unlistedAddress
+     *
+     * @return Trip
+     */
+    public function setUnlistedAddress($unlistedAddress)
+    {
+        $this->unlisted_address = $unlistedAddress;
+
+        return $this;
+    }
+
+    /**
+     * Get unlisted_address
+     *
+     * @return string 
+     */
+    public function getUnlistedAddress()
+    {
+        return $this->unlisted_address;
+    }
 }

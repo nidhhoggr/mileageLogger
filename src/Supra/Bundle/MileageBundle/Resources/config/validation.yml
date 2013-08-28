@@ -7,5 +7,3 @@ Supra\Bundle\MileageBundle\Entity\Trip:
                 minMessage: "You must have at least 2 trip locations"
                 maxMessage: "You must have no more than 2 trip locations"
                 exactMessage: "You must provide exactly 2 trip locations"
-
-                

@@ -2,15 +2,26 @@
 
 {% block content -%}
 
+    <script>
+
+        $(function() {
+
+            SML.TripEvents.binding();
+        });
+
+    </script>
+
     <h1>Logging Trip</h1>
 
     {{ form(form) }}
-
+    <div class="selected-route"></div>
+    <button id="select_route">Select Route</button>
         <ul class="record_actions">
     <li>
         <a href="{{ path('trip') }}">
             Show all trips
         </a>
     </li>
+    <div id="frmSelectRoute" title="Select A Route"></div>
 </ul>
 {% endblock %}

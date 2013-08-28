@@ -25,6 +25,19 @@ class TripType extends AbstractType
             ))
             ->add('client')
             ->add('purpose')
+            ->add('assume','checkbox',array(
+                'label'=>'Assume route?',
+                'mapped'=>false,
+                'required'=>false
+                )
+            )
+            ->add('unlisted','checkbox',array(
+                'label'=>'Destination Unlisted?',
+                'mapped'=>false,
+                'required'=>false
+                )
+            )
+            ->add('unlisted_address')
         ;
     }
     

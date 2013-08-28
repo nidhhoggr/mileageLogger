@@ -1,0 +1,7 @@
+    <h1>Trip Routes</h1>
+
+    <ul id="route_selection_list">
+    {% for route in routes %}
+        <li>{{ route.summary }} <input type="radio" name="selected_route" value="{{ loop.index - 1 }}"></li>
+    {% endfor %} 
+    </ul>

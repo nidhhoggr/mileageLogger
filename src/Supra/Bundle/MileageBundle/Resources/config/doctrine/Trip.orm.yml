@@ -9,10 +9,10 @@ Supra\Bundle\MileageBundle\Entity\Trip:
                 strategy: AUTO
     fields:
         travelTime:
-            type: integer
+            type: float
             nullable: true
         mileage:
-            type: integer
+            type: float
             nullable: true
         createdAt:
             type: datetime
@@ -21,6 +21,9 @@ Supra\Bundle\MileageBundle\Entity\Trip:
             type: datetime
             nullable: true
         purpose: 
+            type: text
+            nullable: true
+        unlisted_address:
             type: text
             nullable: true
     lifecycleCallbacks:

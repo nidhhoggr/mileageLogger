@@ -14,7 +14,6 @@ SML.TripActions = (function() {
 
         } else if(binding.selectionState === 'unlisted-active') {
 
-            console.log($('#supra_bundle_mileagebundle_trip_unlisted_address').val());
 
             entity = binding.selected.val();
             ud = $('#supra_bundle_mileagebundle_trip_unlisted_address').val();            
@@ -69,7 +68,6 @@ SML.TripActions = (function() {
             data: data,
             success: function(msg) {
                 msg = $.parseJSON(msg);
-                console.log(msg);  
                 cls.binding.duration.val(msg.duration);
                 cls.binding.mileage.val(msg.mileage);
             }
